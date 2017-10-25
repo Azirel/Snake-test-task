@@ -20,18 +20,18 @@ public class CellView : MonoBehaviour, IComparable
 
 
 
-    public void SetView(Vector3 localPosition)
+    public virtual void SetView(Vector3 localPosition)
     {
         transform.localPosition = localPosition;
         sprite.enabled = true;
     }
 
-    public void RemoveView()
+    public virtual void RemoveView()
     {
         Destroy(this); //temporary solution
     }
 
-    public int CompareTo(object obj)
+    public virtual int CompareTo(object obj)
     {
         if (obj is CellView == false)
         {
@@ -39,4 +39,24 @@ public class CellView : MonoBehaviour, IComparable
         }
         return state - ((CellView)obj).State;
     }
+
+    //public new virtual bool Equals(object other)
+    //{
+    //    if (other is CellView == true)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+    //public static bool operator == (CellView a, CellView b)
+    //{
+    //    return System.Object.ReferenceEquals(a, b);
+    //}
+
+    //public static bool operator !=(CellView a, CellView b)
+    //{
+    //    return System.Object.ReferenceEquals(a, b);
+    //}
+
 }

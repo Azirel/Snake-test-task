@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4788183021089190}
   - component: {fileID: 114188202240967914}
-  - component: {fileID: 114307679922485482}
+  - component: {fileID: 114573012777671612}
   m_Layer: 5
   m_Name: SnakeBody
   m_TagString: Untagged
@@ -94,7 +94,7 @@ MonoBehaviour:
   mAtlas: {fileID: 114564897375035452, guid: bf1e5dd9d6fbf0846bdc07b4e6692665, type: 2}
   mSpriteName: WhiteCircle
   mFillCenter: 1
---- !u!114 &114307679922485482
+--- !u!114 &114573012777671612
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,9 +102,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1728418362983480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a1a6e65ebb3b246b53b2e18c15dc81, type: 3}
+  m_Script: {fileID: 11500000, guid: 82635eb42b627574a9fd2da289dc4fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellViewTypeName: SnakeBody
+  cellViewTypeName: SnakeHead
   state: 2
   sprite: {fileID: 114188202240967914}
