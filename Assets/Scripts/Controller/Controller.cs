@@ -26,14 +26,6 @@ public class Controller : MonoBehaviour
 
     public void Initialize()
     {
-        //if (snakeBodyCellViewPrefab.Equals(snakeHeadCellViewPrefab))
-        //{
-        //    Debug.Log("???");
-        //}
-        //Dictionary<CellViewState, CellView> viewStatesToPrefabsBinds = new Dictionary<CellViewState, CellView>();
-        //viewStatesToPrefabsBinds.Add(CellViewState.Empty, emptyCellViewPrefab);
-        //viewStatesToPrefabsBinds.Add(CellViewState.SnakeHead, snakeHeadCellViewPrefab);
-        //viewStatesToPrefabsBinds.Add(CellViewState.SnakeBody, snakeBodyCellViewPrefab);
         Vector3[,] cellPositions = new Vector3[gridRows, gridColumns];
         for (int i = 0; i < gridRows; ++i)
         {
@@ -44,6 +36,13 @@ public class Controller : MonoBehaviour
         }
         view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
         view.UpdateCellView(view.Field[0, 0], snakeHeadCellViewPrefab);
+
+        for (int i = 0; i < 11; ++i)
+        {
+            Debug.Log("i = " + i.ToString() + " ,North = " + ((2 * 11 - 1 + i) % 11).ToString() + " ,South = " + ((2 * 11 + 1 + i) % 11).ToString());
+            //Debug.Log("i = " + i.ToString() + " ,South = " + ((2 * 11 + 1 + i) % 11).ToString());
+        }
+
     }
 
 }

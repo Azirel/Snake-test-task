@@ -38,7 +38,6 @@ public class View : MonoBehaviour
                 ++counter;
             }
         }
-        Debug.Log(counter);
     }
 
     CellView[,] field;

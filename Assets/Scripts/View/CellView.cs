@@ -18,8 +18,6 @@ public class CellView : MonoBehaviour, IComparable
     [SerializeField]
     UISprite sprite;
 
-
-
     public virtual void SetView(Vector3 localPosition)
     {
         transform.localPosition = localPosition;
