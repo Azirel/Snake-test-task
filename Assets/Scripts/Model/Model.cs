@@ -27,8 +27,12 @@ public enum MoveDirection
 
 public class Model
 {
+
+    public event Action onSnakeClosure = delegate { };
+
     List<GridNode> nodesSingleList;
     List<List<GridNode>> nodesDoubleLists;
+    Snake snake;
     public void Initialize(CellModelState defaultState, int rows, int columns)
     {
         field = new CellModelState[rows, columns];
@@ -54,10 +58,14 @@ public class Model
                 field[i, j] = defaultState;
             }
         }
+        snake = new Snake();
+        snake.Initialize(nodesSingleList, 3);
+        snake.onSnakeEatsItsBody += () => onSnakeClosure();
+        onSnakeClosure += () => Debug.Log("End of story");
     }
 
     CellModelState[,] field;
-    CellModelState[,] Field
+    public CellModelState[,] Field
     {
         get
         {
@@ -70,6 +78,11 @@ public class Model
             }
             return field;
         }
+    }
+
+    public void Move(MoveDirection direction)
+    {
+        snake.MoveSnake(direction);
     }
 
 }

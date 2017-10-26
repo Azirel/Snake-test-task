@@ -18,10 +18,26 @@ public class Controller : MonoBehaviour
 
     public List<Transform> cellGridPositions;
 
+    [Space(22)]
+    public KeyCode up = KeyCode.UpArrow;
+    public KeyCode down = KeyCode.DownArrow;
+    public KeyCode left = KeyCode.LeftArrow;
+    public KeyCode right = KeyCode.RightArrow;
+
+    public event EventHandler updateEvent = delegate { };
+
+    Model model;
+    Dictionary<CellModelState, CellView> viewToModelBinds;
+    MoveDirection currentDirection = MoveDirection.Right;
     // Use this for initialization
     void Start()
     {
         Initialize();
+    }
+
+    private void Update()
+    {
+        updateEvent(this, null);
     }
 
     public void Initialize()
@@ -36,13 +52,58 @@ public class Controller : MonoBehaviour
         }
         view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
         view.UpdateCellView(view.Field[0, 0], snakeHeadCellViewPrefab);
+        model = new Model();
+        model.Initialize(CellModelState.Empty, gridRows, gridColumns);
+        viewToModelBinds = new Dictionary<CellModelState, CellView>();
+        viewToModelBinds.Add(CellModelState.Empty, emptyCellViewPrefab);
+        viewToModelBinds.Add(CellModelState.SnakeHead, snakeHeadCellViewPrefab);
+        viewToModelBinds.Add(CellModelState.SnakeBody, snakeBodyCellViewPrefab);
 
-        for (int i = 0; i < 11; ++i)
+        updateEvent += DirectionChangeHandler;
+
+        StartCoroutine(GameLoop());
+    }
+
+    IEnumerator GameLoop()
+    {
+        do
         {
-            Debug.Log("i = " + i.ToString() + " ,North = " + ((2 * 11 - 1 + i) % 11).ToString() + " ,South = " + ((2 * 11 + 1 + i) % 11).ToString());
-            //Debug.Log("i = " + i.ToString() + " ,South = " + ((2 * 11 + 1 + i) % 11).ToString());
-        }
+            yield return new WaitForSeconds(0.3f);
+            model.Move(currentDirection);
+            UpdateView(view.Field, model.Field);
+        } while (true);
 
+    }
+
+    void UpdateView(CellView[,] viewGrid, CellModelState[,] modelGrid)
+    {
+        for (int i = 0; i < modelGrid.GetLength(0); ++i)
+        {
+            for (int j = 0; j < modelGrid.GetLength(1); ++j)
+            {
+                view.UpdateCellView(viewGrid[i, j], viewToModelBinds[modelGrid[i, j]]);
+            }
+        }
+    }
+
+    void DirectionChangeHandler(object sender, EventArgs args)
+    {
+        if (Input.GetKeyDown(up) == true)
+        {
+            currentDirection = MoveDirection.Up;
+        }
+        else if(Input.GetKeyDown(down) == true)
+        {
+            currentDirection = MoveDirection.Down;
+        }
+        else if (Input.GetKeyDown(left) == true)
+        {
+            currentDirection = MoveDirection.Left;
+        }
+        else if (Input.GetKeyDown(right) == true)
+        {
+            currentDirection = MoveDirection.Right;
+        }
     }
 
 }

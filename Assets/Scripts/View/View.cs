@@ -46,7 +46,6 @@ public class View : MonoBehaviour
         get { return field; }
         set
         {
-            IComparable tempCompable;
             for (int i = 0; i < field.GetLength(0); ++i)
             {
                 for (int j = 0; j < field.GetLength(1); ++j)
