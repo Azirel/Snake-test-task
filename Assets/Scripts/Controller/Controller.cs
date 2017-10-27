@@ -8,16 +8,25 @@ using SnakeModel;
 
 public class Controller : MonoBehaviour
 {
+    [Range(3, 99)]
     public int gridRows;
+    [Range(3, 99)]
     public int gridColumns;
 
-    public View view;
+    [SerializeField]
+    View view;
+
+    [SerializeField]
+    UILabel gameOverLabel;
 
     public CellView emptyCellViewPrefab;
     public CellView snakeHeadCellViewPrefab;
     public CellView snakeBodyCellViewPrefab;
     public CellView snakeBodySizeIncreaserPrefab;
     public CellView snakeBodySizeDecreaserPrefab;
+    public CellView timeAcceleratorPrefab;
+    public CellView timeDeceleratorPrefab;
+    public CellView headToTailSwitchPrefab;
 
     public List<Transform> cellGridPositions;
 
@@ -27,15 +36,24 @@ public class Controller : MonoBehaviour
     public KeyCode left = KeyCode.LeftArrow;
     public KeyCode right = KeyCode.RightArrow;
 
-    public float delayTime = 0.3f;
+    [Range(0.05f, 99f)]
+    public float moveTime = 0.3f;
+    [Range(2, 33)]
     public uint snakeStartSize = 3;
+    [Range(0.05f, 99f)]
+    public float accelerationTimemultiplier = 1.3f;
+    [Range(0.05f, 99f)]
+    public float decelerationTimeDevider = 1.3f;
+    [Range(0.05f, 99f)]
+    public float timeImpactDuration = 5f;
 
     public event EventHandler updateEvent = delegate { };
 
     Model model;
     Dictionary<CellModelState, CellView> viewToModelBinds;
     MoveDirection currentDirection = MoveDirection.Right;
-    // Use this for initialization
+    bool isContinue = true;
+
     void Start()
     {
         Initialize();
@@ -48,6 +66,7 @@ public class Controller : MonoBehaviour
 
     public void Initialize()
     {
+        //Getting localPositions from transforms
         Vector3[,] cellPositions = new Vector3[gridRows, gridColumns];
         for (int i = 0; i < gridRows; ++i)
         {
@@ -57,10 +76,13 @@ public class Controller : MonoBehaviour
             }
         }
 
+        //Model initialization
         model = new Model();
         model.Initialize(gridRows, gridColumns, (int)snakeStartSize);
-        model.onSnakeClosure += () => Debug.Log("Game over");
+        model.onSnakeClosure += () => { isContinue = false; gameOverLabel.enabled = true; };
+        model.onSnakeEats += OnSnakeEatsHandler;
 
+        //View initialization
         view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
         viewToModelBinds = new Dictionary<CellModelState, CellView>();
         viewToModelBinds.Add(CellModelState.Empty, emptyCellViewPrefab);
@@ -68,23 +90,46 @@ public class Controller : MonoBehaviour
         viewToModelBinds.Add(CellModelState.SnakeBody, snakeBodyCellViewPrefab);
         viewToModelBinds.Add(CellModelState.SizeIncreaser, snakeBodySizeIncreaserPrefab);
         viewToModelBinds.Add(CellModelState.SizeDecreaser, snakeBodySizeDecreaserPrefab);
+        viewToModelBinds.Add(CellModelState.TimeAccelerator, timeAcceleratorPrefab);
+        viewToModelBinds.Add(CellModelState.TimeDecelerator, timeDeceleratorPrefab);
+        viewToModelBinds.Add(CellModelState.SnakeHeadSwitch, headToTailSwitchPrefab);
 
+        //Assigning input commands
         updateEvent += DirectionChangeHandler;
 
+        //Launching game loop
         StartCoroutine(GameLoop());
     }
 
+    //Handling things Model do not know about
+    private void OnSnakeEatsHandler(CellModelState state)
+    {
+        switch (state)
+        {
+            case CellModelState.TimeAccelerator:
+                moveTime /= accelerationTimemultiplier;
+                StartCoroutine(MultiplyMoveTime(timeImpactDuration, accelerationTimemultiplier));
+                break;
+            case CellModelState.TimeDecelerator:
+                moveTime *= decelerationTimeDevider;
+                StartCoroutine(MultiplyMoveTime(timeImpactDuration, 1 / decelerationTimeDevider));
+                break;
+        }
+    }
+
+    //Simple looping
     IEnumerator GameLoop()
     {
         do
         {
             model.Progress(currentDirection);
             UpdateView(view.Field, model.Field);
-            yield return new WaitForSeconds(delayTime);
-        } while (true);
+            yield return new WaitForSeconds(moveTime);
+        } while (isContinue == true);
 
     }
 
+    //Updating view in accordance with model
     void UpdateView(CellView[,] viewGrid, CellModelState[,] modelGrid)
     {
         for (int i = 0; i < modelGrid.GetLength(0); ++i)
@@ -97,6 +142,7 @@ public class Controller : MonoBehaviour
         }
     }
 
+    //Dumb as hell solution, I know, but I'm too tired
     void DirectionChangeHandler(object sender, EventArgs args)
     {
         if (Input.GetKeyDown(up) == true)
@@ -115,6 +161,12 @@ public class Controller : MonoBehaviour
         {
             currentDirection = MoveDirection.Right;
         }
+    }
+
+    IEnumerator MultiplyMoveTime(float delay, float multiplier)
+    {
+        yield return new WaitForSeconds(delay);
+        moveTime *= multiplier;
     }
 
 }

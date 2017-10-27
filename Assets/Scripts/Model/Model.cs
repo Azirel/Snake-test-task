@@ -25,8 +25,6 @@ public enum MoveDirection
     Right
 }
 
-
-
 namespace SnakeModel
 {
     public static class MyExtensions
@@ -61,8 +59,13 @@ namespace SnakeModel
                 return nodesSingleList.FindAll((node) => { return node.currentState == CellModelState.Empty ? true : false; });
             }
         }
-        public void Initialize(int rows, int columns, int startSize = 3, CellModelState defaultState = CellModelState.Empty)
+
+        public void Initialize(int rows, int columns, int startSize = 3, CellModelState defaultState = CellModelState.Empty, int minImpactsOnField = 2, int maxImpactsOnField = 7, int newImpactAppearancePossibility = 20)
         {
+            this.minImpactsOnField = minImpactsOnField;
+            this.maxImpactsOnField = maxImpactsOnField;
+            this.newImpactAppearancePossibility = newImpactAppearancePossibility;
+
             field = new CellModelState[rows, columns];
             GridNode[,] nodesOrigin = new GridNode[rows, columns];
             for (int i = 0; i < rows; ++i)
@@ -95,11 +98,17 @@ namespace SnakeModel
             }
             snake = new Snake();
             snake.Initialize(nodesSingleList, startSize);
-            snake.onSnakeEats += SnakeImpactedBy;
+            snake.onSnakeEats += SnakeMeets;
 
             impacts = new List<CellModelState>();
             impacts.Add(CellModelState.SizeIncreaser);
+            impacts.Add(CellModelState.SizeIncreaser);
+            impacts.Add(CellModelState.SizeIncreaser);
+            impacts.Add(CellModelState.SizeIncreaser);
             impacts.Add(CellModelState.SizeDecreaser);
+            impacts.Add(CellModelState.TimeAccelerator);
+            impacts.Add(CellModelState.TimeDecelerator);
+            impacts.Add(CellModelState.SnakeHeadSwitch);
 
             for (int i = 0; i < minImpactsOnField; ++i)
             {
@@ -123,6 +132,7 @@ namespace SnakeModel
             }
         }
 
+        //On move events
         public void Progress(MoveDirection direction)
         {
             snake.MoveSnake(direction);
@@ -148,7 +158,7 @@ namespace SnakeModel
 
         }
 
-        public void SnakeImpactedBy(CellModelState state)
+        public void SnakeMeets(CellModelState state)
         {
             onSnakeEats(state);
             switch (state)
@@ -161,6 +171,9 @@ namespace SnakeModel
                     break;
                 case CellModelState.SizeDecreaser:
                     snake.DecreaseBodySize();
+                    break;
+                case CellModelState.SnakeHeadSwitch:
+                    snake.SwithHeadWithTail();
                     break;
                 default:
                     break;

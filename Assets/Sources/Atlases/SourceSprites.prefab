@@ -53,9 +53,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: f362782110356c14b839bf3ebc6242e3, type: 2}
   mSprites:
+  - name: AccelerationIcon
+    x: 0
+    y: 44
+    width: 980
+    height: 980
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: DecelerationIcon
+    x: 1494
+    y: 743
+    width: 460
+    height: 281
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 93
+    paddingBottom: 86
   - name: DecreaseIcon
-    x: 513
-    y: 513
+    x: 981
+    y: 0
     width: 511
     height: 511
     borderLeft: 0
@@ -67,7 +93,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: IncreaseIcon
-    x: 0
+    x: 981
     y: 512
     width: 512
     height: 512
@@ -79,9 +105,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: SwitchIcon
+    x: 1494
+    y: 517
+    width: 256
+    height: 225
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 16
+    paddingBottom: 15
   - name: WhiteCircle
-    x: 0
-    y: 309
+    x: 1751
+    y: 540
     width: 203
     height: 202
     borderLeft: 0

@@ -10,8 +10,6 @@ namespace SnakeModel
    
     public class Snake
     {
-        GridNode head;
-        GridNode tail;
         List<GridNode> body;
         MoveDirection currentDirection;
         Dictionary<MoveDirection, MoveDirection> opposites;
@@ -35,8 +33,7 @@ namespace SnakeModel
 
             body = new List<GridNode>();
             List<GridNode> emptyNodes = nodes.FindAll((x) => { return x.currentState == CellModelState.Empty ? true : false; });
-            head = emptyNodes.GetRandom();
-            body.Add(head);
+            body.Add(emptyNodes.GetRandom());
             for (int i = 1; i < startSize; i++)
             {
                 body.Add(body[i - 1].Left);
@@ -84,6 +81,12 @@ namespace SnakeModel
                 body.Remove(last);
                 last.currentState = CellModelState.Empty;
             }
+        }
+
+        public void SwithHeadWithTail()
+        {
+            body.Reverse();
+            currentDirection = opposites[currentDirection];
         }
 
     } 

@@ -20,11 +20,10 @@ public enum CellViewState
 public class View : MonoBehaviour
 {
     Vector3[,] cellsPositions;
-    Func<CellView> getCellViewInstance;
-    Action<CellView, CellView> replaceView;
+    Func<CellView, CellView> getCellViewInstance; // Pooling objects intented, but I'm still too tired, maybe later
+
     public void Initialize(CellView defaultCellView, Vector3[,] cellsPositions)
     {
-        replaceView = ReplaceView;
         this.cellsPositions = cellsPositions;
         field = new CellView[this.cellsPositions.GetLength(0), this.cellsPositions.GetLength(1)];
         for (int i = 0; i < field.GetLength(0); ++i)
@@ -56,19 +55,13 @@ public class View : MonoBehaviour
         }
     }
 
+    //Does not work, I'll handle this later
     public void UpdateCellView(CellView oldCell, CellView newCellPrefab)
     {
-        //if (newCellPrefab.Equals(oldCell) == false)
-        //{
-        //    replaceView(oldCell, newCellPrefab);
-        //    oldCell
-        //}
-        //if (((IComparable)oldCell).CompareTo(newCellPrefab) != 0)
-        //{
 
-        //}
     }
 
+    //This works fine
     public void UpdateCellView(int row, int column, CellView newCellPrefab)
     {
         if (newCellPrefab.Equals(field[row, column]) == false)
@@ -79,12 +72,6 @@ public class View : MonoBehaviour
         }
     }
 
-    void ReplaceView(CellView replacedCellView, CellView newViewPrefab)
-    {
-        var temp = replacedCellView;
-        replacedCellView = NGUITools.AddChild(gameObject, newViewPrefab.gameObject).GetComponent<CellView>();
-        replacedCellView.transform.localPosition = temp.transform.localPosition;
-        temp.RemoveView();
-    }
+
 
 }

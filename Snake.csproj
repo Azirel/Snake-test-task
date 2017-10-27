@@ -226,12 +226,15 @@
     <Compile Include="Assets\Scripts\Model\GridNode.cs" />
     <Compile Include="Assets\Scripts\Model\Model.cs" />
     <Compile Include="Assets\Scripts\Model\Snake.cs" />
+    <Compile Include="Assets\Scripts\View\AccelerationCellView.cs" />
     <Compile Include="Assets\Scripts\View\CellView.cs" />
+    <Compile Include="Assets\Scripts\View\DecelerationCellView.cs" />
     <Compile Include="Assets\Scripts\View\DecreaseCellView.cs" />
     <Compile Include="Assets\Scripts\View\EmptyCellView.cs" />
     <Compile Include="Assets\Scripts\View\IncreaseCellView.cs" />
     <Compile Include="Assets\Scripts\View\SnakeBodyCellView.cs" />
     <Compile Include="Assets\Scripts\View\SnakeHeadCellView.cs" />
+    <Compile Include="Assets\Scripts\View\SwitchCellView.cs" />
     <Compile Include="Assets\Scripts\View\View.cs" />
   </ItemGroup>
   <ItemGroup>

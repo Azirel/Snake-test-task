@@ -7709,6 +7709,7 @@ MonoBehaviour:
   gridRows: 11
   gridColumns: 19
   view: {fileID: 163393611}
+  gameOverLabel: {fileID: 1898609327}
   emptyCellViewPrefab: {fileID: 114762989370809580, guid: 49743e9e6019f7842a80b81593a173bd,
     type: 2}
   snakeHeadCellViewPrefab: {fileID: 114358431211116104, guid: caa170f3ae0af8446840c6944926876c,
@@ -7718,6 +7719,12 @@ MonoBehaviour:
   snakeBodySizeIncreaserPrefab: {fileID: 114587666821937026, guid: 27e6b7abde28014468340f29562cdd7a,
     type: 2}
   snakeBodySizeDecreaserPrefab: {fileID: 114107097809578172, guid: e01a48a36fc94ab41b319e492ce9417e,
+    type: 2}
+  timeAcceleratorPrefab: {fileID: 114365883149545350, guid: 051dc870044f7274cab7cfa316e0fe59,
+    type: 2}
+  timeDeceleratorPrefab: {fileID: 114208007803484008, guid: 416a9431e8980454d98e4ad90ce4fa60,
+    type: 2}
+  headToTailSwitchPrefab: {fileID: 114579317694534920, guid: 88f75510a864e2b4a8b69b1b9396041f,
     type: 2}
   cellGridPositions:
   - {fileID: 1439410041}
@@ -7933,8 +7940,11 @@ MonoBehaviour:
   down: 274
   left: 276
   right: 275
-  delayTime: 0.3
+  moveTime: 0.3
   snakeStartSize: 3
+  accelerationTimemultiplier: 1.3
+  decelerationTimeDevider: 1.5
+  timeImpactDuration: 5
 --- !u!1 &1024342906
 GameObject:
   m_ObjectHideFlags: 0
@@ -16601,6 +16611,103 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Glow - Inner
   mFillCenter: 1
+--- !u!1 &1898609325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1898609326}
+  - component: {fileID: 1898609327}
+  m_Layer: 5
+  m_Name: GameOverLabel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1898609326
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898609325}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2115315053}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1898609327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898609325}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 2115315053}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 2115315053}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 2115315053}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 2115315053}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 1280
+  mHeight: 720
+  mDepth: 4
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1.7777778
+  keepCrispWhenShrunk: 0
+  mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  mFont: {fileID: 0}
+  mText: Game over
+  mFontSize: 210
+  mFontStyle: 0
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mOverflowEllipsis: 0
+  mOverflowWidth: 0
+  mModifier: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
 --- !u!1 &1903568695
 GameObject:
   m_ObjectHideFlags: 0
@@ -18096,6 +18203,7 @@ Transform:
   - {fileID: 1246083515}
   - {fileID: 163393610}
   - {fileID: 999470763}
+  - {fileID: 1898609326}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
