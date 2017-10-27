@@ -52,6 +52,7 @@ namespace SnakeModel
         int maxImpactsOnField = 7;
         List<CellModelState> impacts;
         int newImpactAppearancePossibility = 20;
+        int snakeStartSize = 3;
         List<GridNode> empties
         {
             get
@@ -62,6 +63,7 @@ namespace SnakeModel
 
         public void Initialize(int rows, int columns, int startSize = 3, CellModelState defaultState = CellModelState.Empty, int minImpactsOnField = 2, int maxImpactsOnField = 7, int newImpactAppearancePossibility = 20)
         {
+            this.snakeStartSize = startSize;
             this.minImpactsOnField = minImpactsOnField;
             this.maxImpactsOnField = maxImpactsOnField;
             this.newImpactAppearancePossibility = newImpactAppearancePossibility;
@@ -114,6 +116,15 @@ namespace SnakeModel
             {
                 empties.GetRandom().currentState = impacts.GetRandom();
             }
+        }
+
+        public void Restart()
+        {
+            foreach (var node in nodesSingleList)
+            {
+                node.currentState = CellModelState.Empty;
+            }
+            snake.RespawnSnake(nodesSingleList, snakeStartSize);
         }
 
         CellModelState[,] field;
@@ -179,6 +190,8 @@ namespace SnakeModel
                     break;
             }
         }
+
+        
 
     }
 }

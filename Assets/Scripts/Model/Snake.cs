@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace SnakeModel
 {
-   
+
     public class Snake
     {
         List<GridNode> body;
@@ -30,7 +30,12 @@ namespace SnakeModel
             getNodeBinds.Add(MoveDirection.Left, (node) => { return node.Left; });
             getNodeBinds.Add(MoveDirection.Right, (node) => { return node.Right; });
 
+            RespawnSnake(nodes, startSize);
 
+        }
+
+        public void RespawnSnake(List<GridNode> nodes, int startSize)
+        {
             body = new List<GridNode>();
             List<GridNode> emptyNodes = nodes.FindAll((x) => { return x.currentState == CellModelState.Empty ? true : false; });
             body.Add(emptyNodes.GetRandom());
@@ -89,5 +94,5 @@ namespace SnakeModel
             currentDirection = opposites[currentDirection];
         }
 
-    } 
+    }
 }

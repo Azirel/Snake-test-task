@@ -79,7 +79,7 @@ public class Controller : MonoBehaviour
         //Model initialization
         model = new Model();
         model.Initialize(gridRows, gridColumns, (int)snakeStartSize);
-        model.onSnakeClosure += () => { isContinue = false; gameOverLabel.enabled = true; };
+        model.onSnakeClosure += RestartGame;
         model.onSnakeEats += OnSnakeEatsHandler;
 
         //View initialization
@@ -117,9 +117,19 @@ public class Controller : MonoBehaviour
         }
     }
 
-    //Simple looping
-    IEnumerator GameLoop()
+    public void RestartGame()
     {
+        StopAllCoroutines();
+        gameOverLabel.enabled = true;
+        model.Restart();
+        StartCoroutine(GameLoop(5f));
+    }
+
+    //Simple looping
+    IEnumerator GameLoop(float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+        gameOverLabel.enabled = false;
         do
         {
             model.Progress(currentDirection);
