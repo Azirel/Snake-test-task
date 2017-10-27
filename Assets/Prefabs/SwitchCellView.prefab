@@ -105,6 +105,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e68a9da92a165a488ed2eb84d7a6158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellViewTypeName: 
-  state: 7
-  sprite: {fileID: 114280901919981548}

@@ -9,58 +9,44 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1687216253800848}
+  m_RootGameObject: {fileID: 1728418362983480}
   m_IsPrefabParent: 1
---- !u!1 &1687216253800848
+--- !u!1 &1728418362983480
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4229961870295746}
-  - component: {fileID: 114971380526100010}
-  - component: {fileID: 114358431211116104}
+  - component: {fileID: 4788183021089190}
+  - component: {fileID: 114188202240967914}
+  - component: {fileID: 114573012777671612}
   m_Layer: 5
-  m_Name: SnakeHead
+  m_Name: SnakeBodyCellView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4229961870295746
+--- !u!4 &4788183021089190
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1687216253800848}
+  m_GameObject: {fileID: 1728418362983480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -577.4752, y: 321.264, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114358431211116104
+--- !u!114 &114188202240967914
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1687216253800848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940130e7d21d50e429a37c74ca0a48bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellViewTypeName: SnakeHead
-  state: 1
-  sprite: {fileID: 114971380526100010}
---- !u!114 &114971380526100010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1687216253800848}
+  m_GameObject: {fileID: 1728418362983480}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
@@ -85,8 +71,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0.75, b: 0.12931037, a: 0.841}
   mPivot: 4
-  mWidth: 88
-  mHeight: 88
+  mWidth: 61
+  mHeight: 61
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -108,3 +94,14 @@ MonoBehaviour:
   mAtlas: {fileID: 114564897375035452, guid: bf1e5dd9d6fbf0846bdc07b4e6692665, type: 2}
   mSpriteName: WhiteCircle
   mFillCenter: 1
+--- !u!114 &114573012777671612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1728418362983480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82635eb42b627574a9fd2da289dc4fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

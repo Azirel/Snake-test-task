@@ -83,7 +83,7 @@ public class Controller : MonoBehaviour
         model.onSnakeEats += OnSnakeEatsHandler;
 
         //View initialization
-        view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
+        view.Initialize(emptyCellViewPrefab.GetComponent<CellView>()/*, cellPositions*/, rows: gridRows, columns: gridColumns);
         viewToModelBinds = new Dictionary<CellModelState, CellView>();
         viewToModelBinds.Add(CellModelState.Empty, emptyCellViewPrefab);
         viewToModelBinds.Add(CellModelState.SnakeHead, snakeHeadCellViewPrefab);

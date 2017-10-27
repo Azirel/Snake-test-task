@@ -9,31 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1187417450475714}
+  m_RootGameObject: {fileID: 1491465233820330}
   m_IsPrefabParent: 1
---- !u!1 &1187417450475714
+--- !u!1 &1491465233820330
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4387955575515556}
-  - component: {fileID: 114334561919839214}
-  - component: {fileID: 114587666821937026}
+  - component: {fileID: 4594055670630800}
+  - component: {fileID: 114008970784150030}
+  - component: {fileID: 114107097809578172}
   m_Layer: 5
-  m_Name: SizeIncreaserCellView
+  m_Name: SizeDecreaserCellView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4387955575515556
+--- !u!4 &4594055670630800
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1187417450475714}
+  m_GameObject: {fileID: 1491465233820330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114334561919839214
+--- !u!114 &114008970784150030
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1187417450475714}
+  m_GameObject: {fileID: 1491465233820330}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
@@ -71,9 +71,9 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 57
-  mHeight: 57
-  mDepth: 1
+  mWidth: 69
+  mHeight: 69
+  mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 1
@@ -92,19 +92,16 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 114564897375035452, guid: bf1e5dd9d6fbf0846bdc07b4e6692665, type: 2}
-  mSpriteName: IncreaseIcon
+  mSpriteName: DecreaseIcon
   mFillCenter: 1
---- !u!114 &114587666821937026
+--- !u!114 &114107097809578172
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1187417450475714}
+  m_GameObject: {fileID: 1491465233820330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46ecdc453c747114b9eea11309f5488e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a8d69316e1ec254dac1fd489a6dc2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellViewTypeName: SizeIncreaser
-  state: 3
-  sprite: {fileID: 114334561919839214}

@@ -19,11 +19,45 @@ public enum CellViewState
 
 public class View : MonoBehaviour
 {
+    [SerializeField]
+    UIGrid gridFormer;
+
+    [SerializeField]
+    UIWidget gridFormerWidget;
+
+    [Range(10, 111)]
+    public int cellWidth;
+
+    [Range(10, 111)]
+    public int cellHeight;
+
     Vector3[,] cellsPositions;
     Func<CellView, CellView> getCellViewInstance; // Pooling objects intented, but I'm still too tired, maybe later
 
-    public void Initialize(CellView defaultCellView, Vector3[,] cellsPositions)
+    public void Initialize(CellView defaultCellView, Vector3[,] cellsPositions = null, int rows = 11, int columns = 19)
     {
+        if (cellsPositions == null || cellsPositions.Length < 1)
+        {
+            for (int i = 0; i < rows; ++i)
+            {
+                for (int j = 0; j < columns; ++j)
+                {
+                    NGUITools.AddChild(gridFormer.gameObject, gridFormerWidget.gameObject).gameObject.SetActive(true);
+                }
+            }
+            gridFormer.cellWidth = cellWidth;
+            gridFormer.cellHeight = cellHeight;
+            gridFormer.maxPerLine = columns;
+            gridFormer.Reposition();
+            cellsPositions = new Vector3[rows, columns];
+            List<Transform> cells = new List<Transform>(gridFormer.GetComponentsInChildren<Transform>());
+            cells.RemoveAt(0);
+            for (int i = 0; i < cells.Count; ++i)
+            {
+                cellsPositions[i / columns, i % columns] = cells[i].localPosition;
+            }
+        }
+
         this.cellsPositions = cellsPositions;
         field = new CellView[this.cellsPositions.GetLength(0), this.cellsPositions.GetLength(1)];
         for (int i = 0; i < field.GetLength(0); ++i)
@@ -34,6 +68,7 @@ public class View : MonoBehaviour
                 field[i, j].transform.localPosition = this.cellsPositions[i, j];
             }
         }
+
     }
 
     CellView[,] field;
@@ -71,7 +106,5 @@ public class View : MonoBehaviour
             field[row, column].transform.localPosition = cellsPositions[row, column];
         }
     }
-
-
 
 }
