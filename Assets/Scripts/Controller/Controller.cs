@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SnakeModel;
 
 public class Controller : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Controller : MonoBehaviour
     public CellView emptyCellViewPrefab;
     public CellView snakeHeadCellViewPrefab;
     public CellView snakeBodyCellViewPrefab;
+    public CellView snakeBodySizeIncreaserPrefab;
+    public CellView snakeBodySizeDecreaserPrefab;
 
     public List<Transform> cellGridPositions;
 
@@ -25,6 +28,7 @@ public class Controller : MonoBehaviour
     public KeyCode right = KeyCode.RightArrow;
 
     public float delayTime = 0.3f;
+    public uint snakeStartSize = 3;
 
     public event EventHandler updateEvent = delegate { };
 
@@ -52,13 +56,18 @@ public class Controller : MonoBehaviour
                 cellPositions[i, j] = cellGridPositions[i * gridColumns + j].localPosition;
             }
         }
-        view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
+
         model = new Model();
-        model.Initialize(CellModelState.Empty, gridRows, gridColumns);
+        model.Initialize(gridRows, gridColumns, (int)snakeStartSize);
+        model.onSnakeClosure += () => Debug.Log("Game over");
+
+        view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
         viewToModelBinds = new Dictionary<CellModelState, CellView>();
         viewToModelBinds.Add(CellModelState.Empty, emptyCellViewPrefab);
         viewToModelBinds.Add(CellModelState.SnakeHead, snakeHeadCellViewPrefab);
         viewToModelBinds.Add(CellModelState.SnakeBody, snakeBodyCellViewPrefab);
+        viewToModelBinds.Add(CellModelState.SizeIncreaser, snakeBodySizeIncreaserPrefab);
+        viewToModelBinds.Add(CellModelState.SizeDecreaser, snakeBodySizeDecreaserPrefab);
 
         updateEvent += DirectionChangeHandler;
 
@@ -69,7 +78,7 @@ public class Controller : MonoBehaviour
     {
         do
         {
-            model.Move(currentDirection);
+            model.Progress(currentDirection);
             UpdateView(view.Field, model.Field);
             yield return new WaitForSeconds(delayTime);
         } while (true);
