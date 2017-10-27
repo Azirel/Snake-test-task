@@ -58,10 +58,11 @@ public class View : MonoBehaviour
 
     public void UpdateCellView(CellView oldCell, CellView newCellPrefab)
     {
-        if (newCellPrefab.Equals(oldCell) == false)
-        {
-            replaceView(oldCell, newCellPrefab);
-        }
+        //if (newCellPrefab.Equals(oldCell) == false)
+        //{
+        //    replaceView(oldCell, newCellPrefab);
+        //    oldCell
+        //}
         //if (((IComparable)oldCell).CompareTo(newCellPrefab) != 0)
         //{
 

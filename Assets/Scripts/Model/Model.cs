@@ -33,7 +33,7 @@ public class Model
     List<GridNode> nodesSingleList;
     List<List<GridNode>> nodesDoubleLists;
     Snake snake;
-    public void Initialize(CellModelState defaultState, int rows, int columns)
+    public void Initialize(CellModelState defaultState, int rows, int columns, int startSize)
     {
         field = new CellModelState[rows, columns];
         GridNode[,] nodesOrigin = new GridNode[rows, columns];
@@ -66,7 +66,7 @@ public class Model
             }
         }
         snake = new Snake();
-        snake.Initialize(nodesSingleList, 3);
+        snake.Initialize(nodesSingleList, startSize);
         snake.onSnakeEatsItsBody += () => onSnakeClosure();
         onSnakeClosure += () => Debug.Log("End of story");
     }

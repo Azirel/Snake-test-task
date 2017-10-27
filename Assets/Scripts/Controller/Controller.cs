@@ -69,10 +69,6 @@ public class Controller : MonoBehaviour
     {
         do
         {
-            //if (currentDirection == MoveDirection.Left)
-            //{
-            //    Debug.Log("Stop!");
-            //}
             model.Move(currentDirection);
             UpdateView(view.Field, model.Field);
             yield return new WaitForSeconds(delayTime);
