@@ -24,6 +24,8 @@ public class Controller : MonoBehaviour
     public KeyCode left = KeyCode.LeftArrow;
     public KeyCode right = KeyCode.RightArrow;
 
+    public float delayTime = 0.3f;
+
     public event EventHandler updateEvent = delegate { };
 
     Model model;
@@ -51,7 +53,6 @@ public class Controller : MonoBehaviour
             }
         }
         view.Initialize(emptyCellViewPrefab.GetComponent<CellView>(), cellPositions);
-        view.UpdateCellView(view.Field[0, 0], snakeHeadCellViewPrefab);
         model = new Model();
         model.Initialize(CellModelState.Empty, gridRows, gridColumns);
         viewToModelBinds = new Dictionary<CellModelState, CellView>();
@@ -68,9 +69,13 @@ public class Controller : MonoBehaviour
     {
         do
         {
-            yield return new WaitForSeconds(0.3f);
+            //if (currentDirection == MoveDirection.Left)
+            //{
+            //    Debug.Log("Stop!");
+            //}
             model.Move(currentDirection);
             UpdateView(view.Field, model.Field);
+            yield return new WaitForSeconds(delayTime);
         } while (true);
 
     }
@@ -81,7 +86,8 @@ public class Controller : MonoBehaviour
         {
             for (int j = 0; j < modelGrid.GetLength(1); ++j)
             {
-                view.UpdateCellView(viewGrid[i, j], viewToModelBinds[modelGrid[i, j]]);
+                //view.UpdateCellView(viewGrid[i, j], viewToModelBinds[modelGrid[i, j]]);
+                view.UpdateCellView(i, j, viewToModelBinds[modelGrid[i, j]]);
             }
         }
     }
@@ -92,7 +98,7 @@ public class Controller : MonoBehaviour
         {
             currentDirection = MoveDirection.Up;
         }
-        else if(Input.GetKeyDown(down) == true)
+        else if (Input.GetKeyDown(down) == true)
         {
             currentDirection = MoveDirection.Down;
         }

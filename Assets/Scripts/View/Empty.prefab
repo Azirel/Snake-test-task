@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4546779455435114}
   - component: {fileID: 114933299080209108}
-  - component: {fileID: 114719949723217486}
+  - component: {fileID: 114762989370809580}
   m_Layer: 5
   m_Name: Empty
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114719949723217486
+--- !u!114 &114762989370809580
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,11 +49,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1791217479351456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a1a6e65ebb3b246b53b2e18c15dc81, type: 3}
+  m_Script: {fileID: 11500000, guid: 17a9ac5754fe0a84fb8af5889b30f335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cellViewTypeName: Empty
-  comparison: 0
+  state: 0
   sprite: {fileID: 114933299080209108}
 --- !u!114 &114933299080209108
 MonoBehaviour:

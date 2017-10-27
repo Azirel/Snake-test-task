@@ -19,7 +19,6 @@ public enum CellViewState
 
 public class View : MonoBehaviour
 {
-    //Dictionary<CellViewState, CellView> binds;
     Vector3[,] cellsPositions;
     Func<CellView> getCellViewInstance;
     Action<CellView, CellView> replaceView;
@@ -28,14 +27,12 @@ public class View : MonoBehaviour
         replaceView = ReplaceView;
         this.cellsPositions = cellsPositions;
         field = new CellView[this.cellsPositions.GetLength(0), this.cellsPositions.GetLength(1)];
-        int counter = 0;
         for (int i = 0; i < field.GetLength(0); ++i)
         {
             for (int j = 0; j < field.GetLength(1); ++j)
             {
                 field[i, j] = NGUITools.AddChild(gameObject, defaultCellView.gameObject).GetComponent<CellView>();
                 field[i, j].transform.localPosition = this.cellsPositions[i, j];
-                ++counter;
             }
         }
     }
@@ -61,9 +58,23 @@ public class View : MonoBehaviour
 
     public void UpdateCellView(CellView oldCell, CellView newCellPrefab)
     {
-        if (oldCell.Equals(newCellPrefab) == false)
+        if (newCellPrefab.Equals(oldCell) == false)
         {
             replaceView(oldCell, newCellPrefab);
+        }
+        //if (((IComparable)oldCell).CompareTo(newCellPrefab) != 0)
+        //{
+
+        //}
+    }
+
+    public void UpdateCellView(int row, int column, CellView newCellPrefab)
+    {
+        if (newCellPrefab.Equals(field[row, column]) == false)
+        {
+            field[row, column].RemoveView();
+            field[row, column] = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>();
+            field[row, column].transform.localPosition = cellsPositions[row, column];
         }
     }
 

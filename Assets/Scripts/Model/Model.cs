@@ -37,22 +37,29 @@ public class Model
     {
         field = new CellModelState[rows, columns];
         GridNode[,] nodesOrigin = new GridNode[rows, columns];
+        for (int i = 0; i < rows; ++i)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                nodesOrigin[i, j] = new GridNode();
+            }
+        }
         nodesSingleList = new List<GridNode>();
         nodesDoubleLists = new List<List<GridNode>>();
-        GridNode tempNorth;
-        GridNode tempSouth;
-        GridNode tempWest;
-        GridNode tempEast;
+        GridNode tempUp;
+        GridNode tempDown;
+        GridNode tempLeft;
+        GridNode tempRight;
         for (int i = 0; i < rows; ++i)
         {
             nodesDoubleLists.Add(new List<GridNode>());
             for (int j = 0; j < columns; ++j)
             {
-                tempNorth = nodesOrigin[(2 * rows - 1 + i) % rows, j];
-                tempSouth = nodesOrigin[(2 * rows + 1 + i) % rows, j];
-                tempWest = nodesOrigin[i, (2 * columns - 1 - j) % columns];
-                tempEast = nodesOrigin[i, (2 * columns + 1 - j) % columns];
-                nodesOrigin[i, j].Initialize(tempNorth, tempSouth, tempWest, tempEast, i, j, defaultState);
+                tempUp = nodesOrigin[(rows - 1 + i) % rows, j];
+                tempDown = nodesOrigin[(rows + 1 + i) % rows, j];
+                tempLeft = nodesOrigin[i, (columns - 1 + j) % columns];
+                tempRight = nodesOrigin[i, (columns + 1 + j) % columns];
+                nodesOrigin[i, j].Initialize(tempUp, tempDown, tempLeft, tempRight, i, j, defaultState);
                 nodesSingleList.Add(nodesOrigin[i, j]);
                 nodesDoubleLists[i].Add(nodesOrigin[i, j]);
                 field[i, j] = defaultState;

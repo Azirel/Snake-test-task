@@ -26,7 +26,7 @@ public class CellView : MonoBehaviour, IComparable
 
     public virtual void RemoveView()
     {
-        Destroy(this); //temporary solution
+        Destroy(gameObject); //temporary solution
     }
 
     public virtual int CompareTo(object obj)
@@ -38,23 +38,9 @@ public class CellView : MonoBehaviour, IComparable
         return state - ((CellView)obj).State;
     }
 
-    //public new virtual bool Equals(object other)
-    //{
-    //    if (other is CellView == true)
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-    //public static bool operator == (CellView a, CellView b)
-    //{
-    //    return System.Object.ReferenceEquals(a, b);
-    //}
-
-    //public static bool operator !=(CellView a, CellView b)
-    //{
-    //    return System.Object.ReferenceEquals(a, b);
-    //}
+    public virtual new bool Equals(object other)
+    {
+        return other is CellView ? true : false;
+    }
 
 }

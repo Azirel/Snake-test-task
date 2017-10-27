@@ -228,6 +228,7 @@
     <Compile Include="Assets\Scripts\Model\Snake.cs" />
     <Compile Include="Assets\Scripts\MyExtensions.cs" />
     <Compile Include="Assets\Scripts\View\CellView.cs" />
+    <Compile Include="Assets\Scripts\View\EmptyCellView.cs" />
     <Compile Include="Assets\Scripts\View\SnakeBodyCellView.cs" />
     <Compile Include="Assets\Scripts\View\SnakeHeadCellView.cs" />
     <Compile Include="Assets\Scripts\View\View.cs" />
