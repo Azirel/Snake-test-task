@@ -1626,6 +1626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridFormer: {fileID: 580600476}
   gridFormerWidget: {fileID: 2131017147}
+  gameOverLabel: {fileID: 1898609327}
+  gameSuccessLabel: {fileID: 845561777}
   cellWidth: 65
   cellHeight: 65
 --- !u!1 &164173004
@@ -4853,7 +4855,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2115315053}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &580600476
 MonoBehaviour:
@@ -6516,6 +6518,103 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Glow - Inner
   mFillCenter: 1
+--- !u!1 &845561775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 845561776}
+  - component: {fileID: 845561777}
+  m_Layer: 5
+  m_Name: GameSuccess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &845561776
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 845561775}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1.0008, y: 1.0008, z: 1.0008}
+  m_Children: []
+  m_Father: {fileID: 2115315053}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &845561777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 845561775}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 2115315053}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 2115315053}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 2115315053}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 2115315053}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 1280
+  mHeight: 720
+  mDepth: 4
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1.7777778
+  keepCrispWhenShrunk: 0
+  mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  mFont: {fileID: 0}
+  mText: Sick bastard
+  mFontSize: 210
+  mFontStyle: 0
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mOverflowEllipsis: 0
+  mOverflowWidth: 0
+  mModifier: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
 --- !u!1 &851213118
 GameObject:
   m_ObjectHideFlags: 0
@@ -7704,8 +7803,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3518a1143363b94ca21dd4b25f217fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridRows: 8
-  gridColumns: 9
+  gridRows: 11
+  gridColumns: 19
   view: {fileID: 163393611}
   gameOverLabel: {fileID: 1898609327}
   emptyCellViewPrefab: {fileID: 114762989370809580, guid: 49743e9e6019f7842a80b81593a173bd,
@@ -18106,6 +18205,7 @@ Transform:
   - {fileID: 163393610}
   - {fileID: 999470763}
   - {fileID: 1898609326}
+  - {fileID: 845561776}
   - {fileID: 2131017146}
   - {fileID: 580600475}
   m_Father: {fileID: 0}
@@ -18235,7 +18335,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2115315053}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2131017147
 MonoBehaviour:

@@ -25,6 +25,13 @@ public class View : MonoBehaviour
     [SerializeField]
     UIWidget gridFormerWidget;
 
+    [Space(22)]
+    [SerializeField]
+    UILabel gameOverLabel;
+
+    [SerializeField]
+    UILabel gameSuccessLabel;
+
     [Range(10, 111)]
     public int cellWidth;
 
@@ -90,10 +97,16 @@ public class View : MonoBehaviour
         }
     }
 
-    //Does not work, I'll handle this later
+    //Does not work
     public void UpdateCellView(CellView oldCell, CellView newCellPrefab)
     {
-
+        if (newCellPrefab.Equals(oldCell) == false)
+        {
+            var temp = oldCell;
+            oldCell = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>();
+            oldCell.transform.localPosition = temp.transform.localPosition;
+            temp.RemoveView();
+        }
     }
 
     //This works fine
@@ -105,6 +118,16 @@ public class View : MonoBehaviour
             field[row, column] = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>();
             field[row, column].transform.localPosition = cellsPositions[row, column];
         }
+    }
+
+    public void ShowGameOverLabel(bool value)
+    {
+        gameOverLabel.enabled = value;
+    }
+
+    public void ShowGameSuccessLabel(bool value)
+    {
+        gameSuccessLabel.enabled = value;
     }
 
 }

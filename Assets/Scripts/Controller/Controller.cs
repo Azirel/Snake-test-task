@@ -52,7 +52,6 @@ public class Controller : MonoBehaviour
     Model model;
     Dictionary<CellModelState, CellView> viewToModelBinds;
     MoveDirection currentDirection = MoveDirection.Right;
-    bool isContinue = true;
 
     void Start()
     {
@@ -120,7 +119,7 @@ public class Controller : MonoBehaviour
     public void RestartGame()
     {
         StopAllCoroutines();
-        gameOverLabel.enabled = true;
+        view.ShowGameOverLabel(true);
         model.Restart();
         StartCoroutine(GameLoop(5f));
     }
@@ -129,14 +128,17 @@ public class Controller : MonoBehaviour
     IEnumerator GameLoop(float delay = 0)
     {
         yield return new WaitForSeconds(delay);
-        gameOverLabel.enabled = false;
+        view.ShowGameOverLabel(false);
+        view.ShowGameSuccessLabel(false);
         do
         {
             model.Progress(currentDirection);
             UpdateView(view.Field, model.Field);
             yield return new WaitForSeconds(moveTime);
-        } while (isContinue == true);
-
+        } while (model.IsSnakeObese() == true);
+        RestartGame();
+        view.ShowGameOverLabel(false);
+        view.ShowGameSuccessLabel(true);
     }
 
     //Updating view in accordance with model
@@ -146,7 +148,6 @@ public class Controller : MonoBehaviour
         {
             for (int j = 0; j < modelGrid.GetLength(1); ++j)
             {
-                //view.UpdateCellView(viewGrid[i, j], viewToModelBinds[modelGrid[i, j]]);
                 view.UpdateCellView(i, j, viewToModelBinds[modelGrid[i, j]]);
             }
         }

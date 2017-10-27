@@ -191,7 +191,14 @@ namespace SnakeModel
             }
         }
 
-        
+        public bool IsSnakeObese()
+        {
+            if (nodesSingleList.Count - nodesSingleList.FindAll((node) => { return node.currentState == CellModelState.SnakeBody ? true : false; }).Count <= 2)
+            {
+                return false;
+            }
+            return true;
+        }
 
     }
 }
