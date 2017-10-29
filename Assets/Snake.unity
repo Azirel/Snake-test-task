@@ -8037,7 +8037,7 @@ MonoBehaviour:
   down: 274
   left: 276
   right: 275
-  moveTime: 0.3
+  moveTime: 0.25
   snakeStartSize: 3
   accelerationTimemultiplier: 1.3
   decelerationTimeDevider: 1.5

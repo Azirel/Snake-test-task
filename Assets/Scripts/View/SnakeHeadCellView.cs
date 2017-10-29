@@ -11,4 +11,9 @@ public class SnakeHeadCellView : CellView
     {
         return other is SnakeHeadCellView ? true : false;
     }
+
+    public override void RemoveView()
+    {
+        //base.RemoveView();
+    }
 }

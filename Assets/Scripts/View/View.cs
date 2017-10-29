@@ -39,7 +39,20 @@ public class View : MonoBehaviour
     public int cellHeight;
 
     Vector3[,] cellsPositions;
-    Func<CellView, CellView> getCellViewInstance; // Pooling objects intented, but I'm still too tired, maybe later
+    Func<CellView, CellView> getCellViewInstance; // Pooling objects intented, but I'm too tired, maybe later
+
+    List<CellView> cellList
+    {
+        get
+        {
+            List<CellView> result = new List<CellView>();
+            foreach (var cell in field)
+            {
+                result.Add(cell);
+            }
+            return result;
+        }
+    }
 
     public void Initialize(CellView defaultCellView, Vector3[,] cellsPositions = null, int rows = 11, int columns = 19)
     {
@@ -102,6 +115,7 @@ public class View : MonoBehaviour
     {
         if (newCellPrefab.Equals(oldCell) == false)
         {
+
             var temp = oldCell;
             oldCell = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>();
             oldCell.transform.localPosition = temp.transform.localPosition;
@@ -109,14 +123,26 @@ public class View : MonoBehaviour
         }
     }
 
+    CellView snakeHead;
     //This works fine
     public void UpdateCellView(int row, int column, CellView newCellPrefab)
     {
         if (newCellPrefab.Equals(field[row, column]) == false)
         {
             field[row, column].RemoveView();
-            field[row, column] = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>();
-            field[row, column].transform.localPosition = cellsPositions[row, column];
+            if (newCellPrefab is SnakeHeadCellView)
+            {
+                if (snakeHead == null)
+                {
+                    snakeHead = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>();
+                }
+                field[row, column] = snakeHead;
+            }
+            else
+            {
+                field[row, column] = NGUITools.AddChild(gameObject, newCellPrefab.gameObject).GetComponent<CellView>(); 
+            }
+            field[row, column].SetView(cellsPositions[row, column]);
         }
     }
 
